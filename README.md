@@ -23,14 +23,27 @@ That starts a local web server and opens the app in your default browser.
 Press `Ctrl+C` in the terminal to stop it. If port 8777 is busy, pass another
 one: `./run.sh 8888`.
 
+The server is bound to `127.0.0.1`, so it is reachable from this Mac only and
+never appears on your network, and it serves only the `lithophane` folder, so
+the `.git` directory is never exposed.
+
 ### The manual way
 
 ```bash
 cd ~/Documents/Github/3dp.rocks
-python3 -m http.server 8777
+python3 -m http.server 8777 --bind 127.0.0.1 --directory lithophane
 ```
 
-Then open <http://localhost:8777/lithophane/index.html> and press `Ctrl+C` when done.
+Then open <http://127.0.0.1:8777/index.html> and press `Ctrl+C` when done.
+
+Both flags matter, so don't drop them:
+
+- `--bind 127.0.0.1` keeps the server visible to **this Mac only**. Without it,
+  Python serves to every network interface, meaning anyone on the same Wi-Fi —
+  a cafe, a hotel, a shared office — can open it.
+- `--directory lithophane` serves only the app folder. Without it you serve the
+  whole repository, which hands out a browsable listing of everything including
+  the `.git` folder and its config.
 
 > `python3` here is only acting as a static file server — this is not a Python
 > project and there are no dependencies to install. macOS ships with `python3`
