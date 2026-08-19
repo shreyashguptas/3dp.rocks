@@ -1,0 +1,17 @@
+# macOS
+.DS_Store
+
+# Secrets / local config — never commit these
+.env
+.env.*
+*.pem
+*.key
+id_rsa*
+credentials.json
+service-account*.json
+secrets.*
+
+# Editor / local
+.vscode/
+.idea/
+*.swp
